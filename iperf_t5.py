@@ -37,14 +37,15 @@ def iperf_test():
     print("Starting iperf server...")
     for i in range(4):
         # subprocess.run(['tmux', 'send-keys', '-t', 'nd0', 'iperf -s -p 5003 ', 'C-m'])
-        subprocess.run(['tmux', 'send-keys', '-t', f'nd{i+1}', 'iperf -s -p 5003 ', 'C-m'])
+        subprocess.run(['tmux', 'send-keys', '-t', f'nd{i+1}', 'iperf -s -p 5003 & ', 'C-m'])
 
     
     for i in range(4):
         for j in range(4):
             eth_n = globals()[f'eth_n{j}']
             node_n = globals()[f'node_n{j}']
-            subprocess.run(['tmux', 'send-keys', '-t', f'nd{i+1}', f'iperf -c {eth_n} -p 5003', 'C-m'])
+            # subprocess.run(['tmux', 'send-keys', '-t', f'nd{i+1}', f'iperf -c {eth_n} -p 5003', 'C-m'])
+            subprocess.run(['tmux', 'send-keys', '-t', f'nd{i+1}', f'iperf -c {node_n} -p 5003', 'C-m'])
             # print(f"Node {i+1} testing against {eth_n}")
             time.sleep(15)
     

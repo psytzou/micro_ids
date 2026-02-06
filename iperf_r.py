@@ -48,7 +48,7 @@ def iperf_test(protocol='tcp',bitfile='nic'):
         time.sleep(1)
         print("Starting iperf server...")
         for i in range(4):
-            subprocess.run(['tmux', 'send-keys', '-t', f'nd{i+1}', f'{P_MAP[protocol]} -p 5003', 'C-m'])
+            subprocess.run(['tmux', 'send-keys', '-t', f'nd{i+1}', f'{P_MAP[protocol]} -p 5003 & ', 'C-m'])
         for i in range(4):
             for j in range(4):
                 eth_n = globals()[f'eth_n{j}']
@@ -59,7 +59,7 @@ def iperf_test(protocol='tcp',bitfile='nic'):
     else: #tcp
         print("Starting iperf server...")
         for i in range(4):
-            subprocess.run(['tmux', 'send-keys', '-t', f'nd{i+1}', f'{P_MAP[protocol]} -s -p 5003 ', 'C-m'])    
+            subprocess.run(['tmux', 'send-keys', '-t', f'nd{i+1}', f'{P_MAP[protocol]} -s -p 5003 & ', 'C-m'])    
         for i in range(4):
             for j in range(4):
                 eth_n = globals()[f'eth_n{j}']
