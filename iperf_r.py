@@ -9,7 +9,7 @@ from base_opterm import openterm
 #default: 0 == fpga, 1-4 == node0-4
 # command : .py <no> <ps> <protocol> <bitfile>
 
-
+global file
 n = 5
 eth_n0 = "10.0.4.2"
 eth_n1 = "10.0.5.2"
@@ -74,12 +74,12 @@ def iperf_test(protocol='tcp',bitfile='nic'):
 
 
 def main():
-    if os.path.exists(file):
-        os.remove(file)
-        print(f"{file} removed.")
     protocol = sys.argv[3] if len(sys.argv) > 3 else "tcp"
     bitf = sys.argv[4] if len(sys.argv) > 4 else "nic"
     file = f'iperf_{protocol}_{bitf}_test.log'
+    if os.path.exists(file):
+        os.remove(file)
+        print(f"{file} removed.")
 
     openterm(sys.argv, n)
     iperf_test(protocol=protocol,bitfile=bitf)
